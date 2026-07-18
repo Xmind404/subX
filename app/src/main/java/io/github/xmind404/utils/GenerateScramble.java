@@ -1,5 +1,10 @@
 package io.github.xmind404.utils;
 
 
-public class GenerateScramble {
+public final class GenerateScramble {
+  private GenerateScramble() {
+    throw new UnsupportedOperationException("Utility class cannot be instantiated");
+  }
+
+  
 }
