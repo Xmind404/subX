@@ -1,4 +1,4 @@
-package org.example.data;
+package io.github.xmind404.data;
 
 public final class Moves {
   private Moves(){

@@ -10,6 +10,9 @@ plugins {
     application
 }
 
+group = "io.github.xmind404"
+version = "1.0.0"
+
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -34,7 +37,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "org.example.App"
+    mainClass = "io.github.xmind404.App"
 }
 
 tasks.named<Test>("test") {
