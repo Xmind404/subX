@@ -42,3 +42,11 @@ tasks.named<JavaExec>("run") {
     standardInput = System.`in`
     group = "application"
 }
+
+tasks.register<Exec>("start") {
+    group = "application"
+    dependsOn("installDist")
+    val binary = layout.buildDirectory.file("install/app/bin/app")
+    commandLine(binary.get().asFile.absolutePath)
+    standardInput = System.`in`
+}

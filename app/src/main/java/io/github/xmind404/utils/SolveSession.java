@@ -61,12 +61,14 @@ public final class SolveSession {
     return Timer.formatTime(sum / (n - 2));
   }
 
-  public void printSummary() {
-    System.out.println(Colors.BOLD + "Solves: " + Colors.RESET + count());
-    System.out.println(Colors.BOLD + "Best:   " + Colors.RESET + best());
-    System.out.println(Colors.BOLD + "Worst:  " + Colors.RESET + worst());
-    System.out.println(Colors.BOLD + "ao5:    " + Colors.RESET + averageOf(5));
-    System.out.println(Colors.BOLD + "ao12:   " + Colors.RESET + averageOf(12));
-    System.out.println();
+  public String buildHeader() {
+    String last = solves.isEmpty() ? "N/A" : solves.get(solves.size() - 1).display();
+
+    return Colors.BOLD + "Last: " + Colors.RESET + last + "\n" +
+        Colors.BOLD + "Solves: " + Colors.RESET + count() +
+        "   " + Colors.BOLD + "Best: " + Colors.RESET + best() +
+        "   " + Colors.BOLD + "Worst: " + Colors.RESET + worst() +
+        "   " + Colors.BOLD + "ao5: " + Colors.RESET + averageOf(5) +
+        "   " + Colors.BOLD + "ao12: " + Colors.RESET + averageOf(12);
   }
 }

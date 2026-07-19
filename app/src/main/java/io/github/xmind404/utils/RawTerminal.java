@@ -11,7 +11,7 @@ public final class RawTerminal {
 
   public static void enable() {
     if (enabled) return;
-    run("stty", "raw", "-echo");
+    run("stty", "-icanon", "-echo", "min", "1", "time", "0");
     TerminalInput.start();
     enabled = true;
     Runtime.getRuntime().addShutdownHook(new Thread(RawTerminal::disable));
