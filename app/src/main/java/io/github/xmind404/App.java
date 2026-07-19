@@ -1,6 +1,5 @@
 package io.github.xmind404;
 
-import io.github.xmind404.data.Rubik.RubikTypes;
 import io.github.xmind404.data.Solve;
 import io.github.xmind404.utils.GenerateScramble;
 import io.github.xmind404.utils.RawTerminal;
@@ -14,10 +13,8 @@ public class App {
         SolveSession session = new SolveSession();
 
         while (true) {
-            String scramble = GenerateScramble.generate(RubikTypes.THRxTHR);
-            String header = session.buildHeader();
-
-            Solve solve = Timer.runSolve(header, scramble);
+            String scramble = GenerateScramble.generate(session.getCubeType());
+            Solve solve = Timer.runSolve(session, scramble);
             session.add(solve);
         }
     }

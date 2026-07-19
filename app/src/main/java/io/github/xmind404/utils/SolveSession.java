@@ -1,6 +1,7 @@
 package io.github.xmind404.utils;
 
 import io.github.xmind404.data.Colors;
+import io.github.xmind404.data.Rubik.RubikTypes;
 import io.github.xmind404.data.Solve;
 
 import java.util.ArrayList;
@@ -9,9 +10,24 @@ import java.util.List;
 public final class SolveSession {
 
   private final List<Solve> solves = new ArrayList<>();
+  private RubikTypes cubeType = RubikTypes.THRxTHR;
 
   public void add(Solve solve) {
     solves.add(solve);
+  }
+
+  public boolean deleteLast() {
+    if (solves.isEmpty()) return false;
+    solves.remove(solves.size() - 1);
+    return true;
+  }
+
+  public RubikTypes getCubeType() {
+    return cubeType;
+  }
+
+  public void setCubeType(RubikTypes type) {
+    cubeType = type;
   }
 
   public int count() {
@@ -64,11 +80,27 @@ public final class SolveSession {
   public String buildHeader() {
     String last = solves.isEmpty() ? "N/A" : solves.get(solves.size() - 1).display();
 
-    return Colors.BOLD + "Last: " + Colors.RESET + last + "\n" +
+    return Colors.BOLD + "Cube: " + Colors.RESET + cubeType.name() + "\r\n" +
+        Colors.BOLD + "Last: " + Colors.RESET + last + "\r\n" +
         Colors.BOLD + "Solves: " + Colors.RESET + count() +
         "   " + Colors.BOLD + "Best: " + Colors.RESET + best() +
         "   " + Colors.BOLD + "Worst: " + Colors.RESET + worst() +
         "   " + Colors.BOLD + "ao5: " + Colors.RESET + averageOf(5) +
         "   " + Colors.BOLD + "ao12: " + Colors.RESET + averageOf(12);
+  }
+
+  public String buildHistory() {
+    if (solves.isEmpty()) {
+      return Colors.GRAY + "No solves yet." + Colors.RESET + "\r\n";
+    }
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < solves.size(); i++) {
+      Solve s = solves.get(i);
+      sb.append(Colors.BOLD).append(String.format("%3d. ", i + 1)).append(Colors.RESET);
+      sb.append(s.display());
+      sb.append("   ").append(Colors.GRAY).append(s.getScramble()).append(Colors.RESET);
+      sb.append("\r\n");
+    }
+    return sb.toString();
   }
 }

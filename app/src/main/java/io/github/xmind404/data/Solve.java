@@ -27,6 +27,10 @@ public class Solve {
     return solve;
   }
 
+  public static Solve manual(String scramble, long rawNanos) {
+    return new Solve(scramble, rawNanos, 0);
+  }
+
   public String getScramble() {
     return scramble;
   }
@@ -45,6 +49,10 @@ public class Solve {
 
   public void toggleDnf() {
     manualPenalty = manualPenalty == Penalty.DNF ? Penalty.NONE : Penalty.DNF;
+  }
+
+  public void clearPenalty() {
+    manualPenalty = Penalty.NONE;
   }
 
   public long getFinalNanos() {
