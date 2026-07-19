@@ -1,7 +1,7 @@
-package io.github.xmind404.data;
+package io.github.xmind404.data.Rubik;
 
-public final class Moves {
-  private Moves(){
+public final class RubikMoves {
+  private RubikMoves(){
     throw new UnsupportedOperationException("This is class with constant data( possible moves )");
   }
 
