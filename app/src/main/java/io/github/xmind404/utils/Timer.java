@@ -28,7 +28,8 @@ public final class Timer {
     double[] rot = {0, 0};
 
     while (true) {
-      String cube = Ascii.cubeFrame(rot[0], rot[1]);
+      int grid = Ascii.gridSizeFor(session.getCubeType());
+      String cube = Ascii.cubeFrame(rot[0], rot[1], grid);
       rot[0] += 0.15;
       rot[1] += 0.09;
 
@@ -78,7 +79,8 @@ public final class Timer {
       long elapsedMs = (System.nanoTime() - inspectionStart) / 1_000_000;
 
       if (!holding && elapsedMs >= INSPECTION_DNF_MS) {
-        String cube = Ascii.cubeFrame(rot[0], rot[1]);
+        int grid = Ascii.gridSizeFor(session.getCubeType());
+        String cube = Ascii.cubeFrame(rot[0], rot[1], grid);
         Renderer.frame(cube, header, scramble, Colors.RED + Colors.BOLD + "DNF - inspection overtime" + Colors.RESET);
         return Solve.dnf(scramble, elapsedMs);
       }
@@ -129,7 +131,8 @@ public final class Timer {
       }
 
       double secondsLeft = Math.max(0, (INSPECTION_MS - elapsedMs) / 1000.0);
-      String cube = Ascii.cubeFrame(rot[0], rot[1]);
+      int grid = Ascii.gridSizeFor(session.getCubeType());
+      String cube = Ascii.cubeFrame(rot[0], rot[1], grid);
       rot[0] += 0.15;
       rot[1] += 0.09;
 
@@ -143,7 +146,8 @@ public final class Timer {
     long solveStart = System.nanoTime();
 
     while (true) {
-      String cube = Ascii.cubeFrame(rot[0], rot[1]);
+      int grid = Ascii.gridSizeFor(session.getCubeType());
+      String cube = Ascii.cubeFrame(rot[0], rot[1], grid);
       rot[0] += 0.15;
       rot[1] += 0.09;
 
@@ -164,7 +168,8 @@ public final class Timer {
     long totalNanos = System.nanoTime() - solveStart;
 
     Solve solve = new Solve(scramble, totalNanos, inspectionElapsedAtStartMs);
-    String cube = Ascii.cubeFrame(rot[0], rot[1]);
+    int grid = Ascii.gridSizeFor(session.getCubeType());
+    String cube = Ascii.cubeFrame(rot[0], rot[1], grid);
     Renderer.frame(cube, header, scramble, Colors.BOLD + "Time: " + Colors.RESET + solve.display());
 
     promptPenalty(header, scramble, solve);
@@ -177,7 +182,8 @@ public final class Timer {
     while (true) {
       String preview = digits.length() == 0 ? "0.00" : formatTime(parseManualNanos(digits.toString()));
 
-      String cube = Ascii.cubeFrame(rot[0], rot[1]);
+      int grid = Ascii.gridSizeFor(session.getCubeType());
+      String cube = Ascii.cubeFrame(rot[0], rot[1], grid);
       rot[0] += 0.15;
       rot[1] += 0.09;
 
