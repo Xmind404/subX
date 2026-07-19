@@ -18,11 +18,15 @@ public final class GenerateScramble {
 
 
 
-  public static String generate(RubikTypes rubikTypes){
+  public static String generate(RubikTypes rubikType){
     int ScrambleLength = 0;
-    String previousMove = null;
 
-    switch (rubikTypes){
+    String previousMove = "";
+    String move = "";
+
+    boolean isBigCube = (rubikType.ordinal() >= RubikTypes.FOUxFOU.ordinal()) ? true : false;
+
+    switch (rubikType){
       case TWOxTWO -> ScrambleLength = RubikTypesScrambleLengths.TWOxTWO;
       case THRxTHR -> ScrambleLength = RubikTypesScrambleLengths.THRxTHR;
       case FOUxFOU -> ScrambleLength = RubikTypesScrambleLengths.FOUxFOU;
@@ -31,8 +35,16 @@ public final class GenerateScramble {
 
     List<String> scramble = new ArrayList<>();
 
+
     while (scramble.size() < ScrambleLength){
-      String move = RubikMoves.All[RANDOM.nextInt(RubikMoves.All.length)];
+      if (isBigCube){
+        move = RubikMoves.BigCubeMoves[RANDOM.nextInt(RubikMoves.BigCubeMoves.length)];
+      }else{
+        move = RubikMoves.SmallCubeMoves[RANDOM.nextInt(RubikMoves.SmallCubeMoves.length)];
+      }
+
+
+
       String moveBase = move.substring(0, 1);
 
       if (!moveBase.equals(previousMove)){

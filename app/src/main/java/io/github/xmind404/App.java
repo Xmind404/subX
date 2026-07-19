@@ -11,8 +11,6 @@ public class App {
 
     public static void main(String[] args) {
 
-        System.out.println(GenerateScramble.generate(RubikTypes.THRxTHR));
-
-        System.out.println("Xmind404");
+        System.out.println(GenerateScramble.generate(RubikTypes.FIVxFIV));
     }
 }
